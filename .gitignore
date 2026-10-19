@@ -1,0 +1,5 @@
+# Videos grandes - distribuidos via Release do GitHub
+video/
+*.mkv
+*.rar
+Thumbs.db
