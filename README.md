@@ -2,7 +2,8 @@
 
 Entrega consolidada do laboratório **lab-popovici-01**, uma arquitetura cloud-native no Microsoft Azure implantada manualmente com a Azure CLI. O repositório reúne a documentação técnica, o vídeo explicativo e as evidências da implantação.
 
-- **Autor:** Nickolas Corazza
+- **Autor:** Nickolas Corazza Alve
+- **RM:** 562265
 - **Ambiente:** Microsoft Azure, região Brazil South, assinatura Azure for Students
 - **Implantação:** 01/10/2026, com Azure CLI 2.90.0 no Azure Cloud Shell (PowerShell)
 - **Resource Group:** `rg-lab-popovici-01`
