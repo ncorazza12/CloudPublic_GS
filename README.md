@@ -16,7 +16,7 @@ Entrega consolidada do laboratório **lab-popovici-01**, uma arquitetura cloud-n
 | Vídeo explicativo | [Google Drive](https://drive.google.com/file/d/1O1jlUvjGeHAX6kF-rL8ypdPN62crsUy0/view?usp=sharing) (arquivo `CloudPublic-Video-Explicativo.mkv`) |
 | Evidências da implantação (25 capturas de tela, com descrição de cada uma) | [evidencias/](evidencias/README.md) |
 | Diagrama da arquitetura | [documentacao/arquitetura.png](documentacao/arquitetura.png) |
-| Laboratório Azure | [https://github.com/ncorazza12/cloudpublic-cp2] |
+| Laboratório Azure | [GitHub](https://github.com/ncorazza12/cloudpublic-cp2) |
 
 > **Sobre o vídeo:** o arquivo (`.mkv`, cerca de 446 MiB) é grande demais para o repositório, porque o GitHub bloqueia arquivos acima de 100 MiB. Por isso ele está hospedado no Google Drive e é acessado por link. Se o navegador não reproduzir o formato `.mkv`, baixe o arquivo e abra em um player como o VLC.
 
