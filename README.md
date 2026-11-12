@@ -2,8 +2,7 @@
 
 Entrega consolidada do laboratório **lab-popovici-01**, uma arquitetura cloud-native no Microsoft Azure implantada manualmente com a Azure CLI. O repositório reúne a documentação técnica, o vídeo explicativo e as evidências da implantação.
 
-- **Autor:** Nickolas Corazza Alves
-- **RM:** 562265
+- **Autor:** Nickolas Corazza
 - **Ambiente:** Microsoft Azure, região Brazil South, assinatura Azure for Students
 - **Implantação:** 01/10/2026, com Azure CLI 2.90.0 no Azure Cloud Shell (PowerShell)
 - **Resource Group:** `rg-lab-popovici-01`
@@ -14,7 +13,8 @@ Entrega consolidada do laboratório **lab-popovici-01**, uma arquitetura cloud-n
 |---|---|
 | Documentação técnica (artigo no formato IEEE) | [PDF](documentacao/Documentacao_IEEE_lab-popovici-01.pdf) · [Word](documentacao/Documentacao_IEEE_lab-popovici-01.docx) |
 | Vídeo explicativo | [Google Drive](https://drive.google.com/file/d/1O1jlUvjGeHAX6kF-rL8ypdPN62crsUy0/view?usp=sharing) (arquivo `CloudPublic-Video-Explicativo.mkv`) |
-| Evidências da implantação (25 capturas de tela, com descrição de cada uma) | [evidencias/](evidencias/README.md) |
+| Evidências da implantação (27 capturas de tela, com descrição de cada uma) | [evidencias/](evidencias/README.md) |
+| Teste de envio de e-mail (Prints 26 e 27) | [evidencias/](evidencias/README.md#print-26-teste-de-envio-de-e-mail-no-azure) |
 | Diagrama da arquitetura | [documentacao/arquitetura.png](documentacao/arquitetura.png) |
 
 > **Sobre o vídeo:** o arquivo (`.mkv`, cerca de 446 MiB) é grande demais para o repositório, porque o GitHub bloqueia arquivos acima de 100 MiB. Por isso ele está hospedado no Google Drive e é acessado por link. Se o navegador não reproduzir o formato `.mkv`, baixe o arquivo e abra em um player como o VLC.
@@ -76,7 +76,7 @@ O checklist de 16 itens do roteiro foi cumprido, todos com evidência. Resumo:
 | Container App | Revisão `Healthy`; endpoint HTTPS público respondeu com a página de exemplo |
 | Segredo no Container App | `LAB_SECRET` referencia o `labsecret` por `secretRef`; o valor permanece no Key Vault |
 | *Job* | Iniciado manualmente; execução registrada, estado final `Failed` |
-| Communication Services | `Succeeded`; DKIM, SPF e DMARC verificados |
+| Communication Services | `Succeeded`; DKIM, SPF e DMARC verificados; domínio conectado e e-mail de teste enviado e recebido (Prints 26 e 27) |
 | Action Group | Ativo, com receptor de e-mail habilitado |
 
 ## Desvios do roteiro
@@ -91,6 +91,8 @@ O checklist de 16 itens do roteiro foi cumprido, todos com evidência. Resumo:
 | 6 | Segredo referenciado sem versão | A aplicação usa a versão mais recente |
 | 7 | Parâmetro `--name` no lugar de `--database-name` e `--domain-name` | Exigido pela versão da CLI usada |
 | 8 | E-mail real no Action Group | O endereço fictício do roteiro notificaria terceiros |
+
+**Atualização posterior (teste de e-mail):** o roteiro não inclui o envio de e-mails. Para testá-lo, foi necessário um passo adicional: **conectar o `AzureManagedDomain` ao recurso Communication Services**, o que não havia sido feito na implantação original. Depois disso, um e-mail de teste foi enviado pelo Azure e recebido em uma caixa de entrada (Prints [26](evidencias/README.md#print-26-teste-de-envio-de-e-mail-no-azure) e [27](evidencias/README.md#print-27-e-mail-de-teste-recebido)). O artigo e o vídeo registram o estado anterior a esse teste. O envio a partir da aplicação não foi implementado: o teste usou o próprio recurso de comunicação.
 
 **Falha na criação do *job*:** a causa do `IdentityDoesNotExist` **não foi confirmada**. A hipótese é uma limitação da extensão `containerapp` (em preview) ao combinar identidade e registry na criação de *jobs*. O contorno foi criar o *job* sem registry, atribuir a identidade, configurar o registry com ela e só então atualizar a imagem para a do ACR.
 
@@ -119,12 +121,12 @@ Este é um **ambiente de laboratório**, e não uma arquitetura de produção.
 - Sem redundância de zona, PostgreSQL em tier Burstable e Storage `Standard_LRS`.
 - A aplicação tem *ingress* externo; Key Vault, ACR e Storage aceitam conexões pela rede pública (com autenticação). Somente o PostgreSQL é privado.
 - O Key Vault tem *soft delete* de 90 dias, mas sem proteção contra purga.
-- O Action Group não tem regra de alerta associada; nenhum e-mail foi enviado, e o domínio de e-mail não foi associado ao Communication Services.
+- O Action Group não tem regra de alerta associada. O e-mail de teste foi enviado e recebido, mas a aplicação de exemplo não envia e-mails.
 - A imagem de exemplo não se conecta ao banco.
 - A execução do *job* terminou como `Failed`, e a causa **não foi comprovada**. Uma hipótese plausível é que a imagem de exemplo é um servidor web que não termina sozinho e o *timeout* de 120 s encerrou a execução. A investigação por logs não foi concluída.
 - A extensão `containerapp` e o grupo `communication email` estavam em preview.
 
-**Trabalhos futuros:** *private endpoints* e proteção contra purga, regras de alerta, investigação do *job* por logs, envio de e-mail de teste, exportação de custos por recurso, automação por *scripts* ou infraestrutura como código e avaliação pelo Azure Well-Architected Framework.
+**Trabalhos futuros:** *private endpoints* e proteção contra purga, regras de alerta, investigação do *job* por logs, envio de e-mails a partir da aplicação, exportação de custos por recurso, automação por *scripts* ou infraestrutura como código e avaliação pelo Azure Well-Architected Framework.
 
 ## Convenções do ambiente
 
@@ -141,7 +143,7 @@ CloudPublic_GS/
 │   └── arquitetura.png
 └── evidencias/
     ├── README.md            (descrição de cada captura de tela)
-    ├── Print 1 ... Print 25 (capturas de tela)
+    ├── Print 1 ... Print 27 (capturas de tela)
     ├── CLOUDPUBLIC-CP2.docx
     └── CLOUDPUBLIC-CP2.pdf
 ```

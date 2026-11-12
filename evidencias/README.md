@@ -1,4 +1,4 @@
-# Laboratório Azure: lab-popovici-01 (CP2)
+# Evidências do laboratório lab-popovici-01
 
 Evidências da execução do laboratório **lab-popovici-01**, uma arquitetura Azure baseada em Container Apps, ACR, Managed Identity, VNet, Private DNS, PostgreSQL Flexible Server, Key Vault, Storage Account, Application Insights, Log Analytics e Azure Communication Services.
 
@@ -7,7 +7,7 @@ Evidências da execução do laboratório **lab-popovici-01**, uma arquitetura A
 - **Resource Group:** `rg-lab-popovici-01`
 - **Ferramentas:** Azure Cloud Shell (PowerShell) e Azure CLI
 
-> Esta é a primeira entrega (execução do laboratório). A documentação completa do ambiente e o vídeo explicativo serão adicionados na segunda entrega.
+Os Prints 1 a 25 documentam a implantação e a validação. Os Prints 26 e 27 documentam o teste de envio de e-mail, feito depois da implantação.
 
 ## Evidências
 
@@ -160,3 +160,15 @@ Listagem dos 19 recursos do Resource Group, cobrindo rede, dados, identidade, se
 Diagrama dos recursos do `rg-lab-popovici-01` no Portal, mostrando as relações entre eles.
 
 ![Print 25: Resource Visualizer](Print%2025%20Resource%20Visualizer.jpeg)
+
+### Print 26: Teste de envio de e-mail no Azure
+
+Envio de um e-mail de teste pelo Azure Communication Services, usando o domínio gerenciado (`AzureManagedDomain`) conectado ao recurso `lab-popovici-01-comm-4827`. A conexão do domínio ao Communication Services é um passo adicional, que não consta no roteiro original.
+
+![Print 26: Teste de envio de e-mail no Azure](Print%2026%20Teste%20de%20envio%20de%20e-mail%20no%20Azure.png)
+
+### Print 27: E-mail de teste recebido
+
+O e-mail de teste enviado pelo Azure chegou à caixa de entrada do destinatário, o que confirma o funcionamento da camada de comunicação de ponta a ponta.
+
+![Print 27: E-mail de teste recebido](Print%2027%20E-mail%20de%20teste%20recebido.png)
